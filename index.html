@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="game-area">
+          <canvas id="snake" width="600" height="360" tabindex="1"></canvas>
+          <div class="overlay">
+            <p class="game-msg"></p>
+            <p id="finalScore"></p>
+            <div class="buttons">
+              <div id="startBtn" class="game-btn">Start Game</div>
+              <div id="resumeBtn" class="game-btn hidden">Resume</div>
+            </div>
+            <div class="difficulty">
+              <p>Game difficulty</p>
+              <div>
+                <div class="radio-field">
+                  <input type="radio" name="difficulty" id="radioEasy" value="easy">
+                  <label for="radioEasy">Easy</label>
+                </div>
+                <div class="radio-field">
+                  <input type="radio" name="difficulty" id="radioNormal" value="normal" checked>
+                  <label for="radioNormal">Normal</label>
+                </div>
+                <div class="radio-field">
+                  <input type="radio" name="difficulty" id="radioHard" value="hard">
+                  <label for="radioHard">Hard</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="game-details">
+          <input type="checkbox" name="sound" id="sound">
+          <label for="sound">Sound on</label>
+          <p class="hint"><span>Hint:</span> Use W, S, D, A or the arrows to move. Press spacebar to pause the game.</p>
+          <p class="score-txt"><span>Score:</span> <span class="current-score">0</span></p>
+        </div>
+      </div>
+      <!-- AUDIO FILES !-->
+      <audio id="eating" src="http://alexsalov.com/assets/snake/bite.mp3" preload="auto"></audio>
+      <audio id="hit_wall" src="http://alexsalov.com/assets/snake/hit_wall.mp3" preload="auto"></audio>
+      <audio id="pain" src="http://alexsalov.com/assets/snake/pain.mp3" preload="auto"></audio>
+      <audio id="snake_background" src="http://alexsalov.com/assets/snake/snake_background.mp3" preload="auto" loop></audio>
+
+    <script src="s.js"></script>
+</body>
+</html>
