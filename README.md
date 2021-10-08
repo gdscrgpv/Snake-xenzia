@@ -4,15 +4,12 @@ Snake game implemented using Html Css and JS
 
 
 ### Things to learn
-
 - [X] Basic JS Game rendering techniques
 - [X] Basic Html,Css
 
 
 
-
 ### Things to add
-- [X] Basic JS Game rendering techniques
 - [ ] Complete the game
 - [ ] difficulty levels not working
 - [ ] game not over on collision on wall
