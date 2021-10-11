@@ -12,6 +12,9 @@
       scoreTxt = $('.current-score'),
       sound = $('#sound'),
       soundLabel = sound.nextSibling,
+      eat = $('#eating'),
+      hitwall = $('#hit_wall'),
+      pain = $('#pain'),
       bkgrMusic = $('#snake_background');
   
     bkgrMusic.volume = 0.25;
@@ -38,10 +41,10 @@
     // Game over messages
     var messages = {
       itself: [
-        "Add message to this"
+        "Game Over By Eat Itself"
       ],
       wall: [
-        "Add message to this"
+        "Game Over By Hiting Wall"
       ]
     };
   
@@ -98,6 +101,15 @@
     addListener(pageCanvas, 'keydown', function(e) {
       if (e.keyCode === 32 && !over) {
         (!paused) ? pauseGame(): resumeGame();
+      }
+    });
+
+    addListener(sound, 'change', function(){
+      if(sound.checked){
+        bkgrMusic.play();
+      }
+      else{
+        bkgrMusic.pause();
       }
     });
   
@@ -188,14 +200,19 @@
         var key = e.keyCode;
         
         // Allow snake to be moved with W, S, D, A as well as the arrow keys
+        if ((key === 65 || key === 37) && dir !== 'r') dir = 'l';
+        else if ((key === 87 || key === 38) && dir !== 'd') dir = 'u';
+        else if ((key === 68 || key === 39) && dir !== 'l') dir = 'r';
+        else if ((key === 83 || key === 40) && dir !== 'u') dir = 'd';
+      });
 
 
         // Allow snake to be moved with r, l, u, d as well as the arrow keys
-        if ((key === 76) && dir !== 'r') dir = 'l';
-        else if ((key === 85 ) && dir !== 'd') dir = 'u';
-        else if ((key === 82 ) && dir !== 'l') dir = 'r';
-        else if ((key === 68) && dir !== 'u') dir = 'd';
-      });
+      //   if ((key === 76) && dir !== 'r') dir = 'l';
+      //   else if ((key === 85 ) && dir !== 'd') dir = 'u';
+      //   else if ((key === 82 ) && dir !== 'l') dir = 'r';
+      //   else if ((key === 68) && dir !== 'u') dir = 'd';
+      // });
   
       // Directions
       switch (dir) {
@@ -225,29 +242,24 @@
 
         storage.removeAll();
         pageCanvas.focus();
-    
-        snake = new Snake(canvasArea, 0, 0, objectSize, '#000');
-        // snake.init();
 
-        Snake.prototype.initStart = function() {
-          for (var i = this.length - 1; i >= 0; i--) {
-            this.pos.push({
-              x: -1,
-              y: 0
-            });
-          }
-        };
+        if(sound.checked){
+          hitwall.play();
+        }
 
-        snake.initStart();    
-
-        food = new CanvasObj(canvasArea, 0, 0 ,objectSize, '#ff0000');
-  
+        hitType = 'wall';
+        over = true;
+        gameOver();  
 
       }
   
       // Food collision
       if (headX === food.x && headY === food.y) {
-        if (!muted) $('#eating').play();
+        
+
+        if(sound.checked){
+          eat.play();
+        }
   
         food = new CanvasObj(canvasArea, getFoodX(), getFoodY(), objectSize, '#ff0000');
         tail = {
@@ -272,6 +284,9 @@
   
           if ((headX === square.x && headY === square.y) && !over) {
             hitType = 'itself';
+            if(sound.checked){
+              pain.play();
+            }
             over = true;
             gameOver();
           }
@@ -362,16 +377,6 @@
     function gameOver() {
       clearInterval(gameLoop);
   
-      if (!muted) {
-      
-  
-        if (hitType === 'wall') {
-          $('#hit_wall').play();
-        } else if (hitType === 'itself') {
-          $('#pain').play();
-        }
-      }
-  
       gameMenu.classList.remove('hidden');
       difficultyMenu.classList.remove('hidden');
       resumeBtn.classList.add('hidden');
@@ -386,6 +391,10 @@
   
       gameMenu.classList.remove('hidden');
       resumeBtn.classList.remove('hidden');
+      
+      if(sound.checked){
+        bkgrMusic.pause();
+      }
   
       paused = true;
   
@@ -414,6 +423,12 @@
     
   
       gameMenu.classList.add('hidden');
+
+      if(sound.checked){
+        bkgrMusic.play();
+      }
+
+
       paused = false;
   
       // Restore game state
@@ -471,14 +486,10 @@
     // Check if sound is enabled
     function checkSound() {
       if (sound.checked && paused === false && gameLoop !== undefined) {
-        muted = false;
         soundLabel.innerHTML = 'Sound off';
-        bkgrMusic.play();
       } else {
         sound.checked = false;
-        muted = true;
         soundLabel.innerHTML = 'Sound on';
-        bkgrMusic.pause();
       }
   
  

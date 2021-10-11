@@ -1,10 +1,9 @@
 body {
     font: 100% 'Arial', sans-serif;
-    background: #2f3dbd;
+    background-image: url(assets/wallpaperflare.com_wallpaper.jpg);
   }
   
   canvas {
-    background-color: #fff;
     box-sizing: border-box;
     outline: none;
   }
