@@ -12,11 +12,11 @@ Snake game implemented using Html Css and JS
 ### Things to add
 - [ ] Complete the game
 - [ ] difficulty levels not working
-- [ ] game not over on collision on wall
+- [x] game not over on collision on wall
 - [ ] snake starts from 0 0 after collision from wall
-- [ ] sounds not working
-- [ ] change direction of keys from r, l, d, u to arrow keys
-- [ ] add custom message on game over
+- [x] sounds not working
+- [x] change direction of keys from r, l, d, u to arrow keys
+- [x] add custom message on game over
 
 
 
