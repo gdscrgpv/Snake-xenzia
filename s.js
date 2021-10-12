@@ -205,14 +205,6 @@
         else if ((key === 68 || key === 39) && dir !== 'l') dir = 'r';
         else if ((key === 83 || key === 40) && dir !== 'u') dir = 'd';
       });
-
-
-        // Allow snake to be moved with r, l, u, d as well as the arrow keys
-      //   if ((key === 76) && dir !== 'r') dir = 'l';
-      //   else if ((key === 85 ) && dir !== 'd') dir = 'u';
-      //   else if ((key === 82 ) && dir !== 'l') dir = 'r';
-      //   else if ((key === 68) && dir !== 'u') dir = 'd';
-      // });
   
       // Directions
       switch (dir) {
